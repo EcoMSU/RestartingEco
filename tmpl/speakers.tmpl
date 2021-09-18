@@ -1,0 +1,29 @@
+{{define "Speakers"}}
+<div class="speakers">
+    <div class="space"></div>
+    {{$prefix := .SpeakersPrefix}}
+    {{range .SpeakersList}}
+    <div class="item" onclick="showSpeaker(event, this.innerHTML);">
+        <div class="card">
+            <div class="photo">
+                <picture>
+                    <img alt="" src="{{$prefix}}{{.Img}}">
+                </picture>
+            </div>
+            <b>{{.Name}}</b>
+            <p>
+            <ul>
+                {{range .Desc}}
+                <li>{{.}}</li>
+                {{end}}
+            </ul>
+            </p>
+            <span class="eye">
+                <img alt="" class="square" src="icon/eye.svg">
+            </span>
+        </div>
+    </div>
+    {{end}}
+    <div class="space"></div>
+</div>
+{{end}}

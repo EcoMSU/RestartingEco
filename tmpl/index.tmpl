@@ -1,0 +1,132 @@
+{{define "head"}}
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<script>
+    //var colors = ['transparent', '#ffc400', '#1BBC9B', '#1de9b6', '#3f51b5', '#6d4c41'];
+    var colors = ['transparent', '#ffc400', '#1de9b6', '#3f51b5', '#6d4c41'];
+</script>
+{{end}}
+
+{{define "footer"}}
+<script>
+    var toggled = false;
+    function showSpeaker(event, data) {
+        event.stopPropagation();
+        event.cancelBubble = true;
+        var speak = document.getElementById('section3');
+        var m = document.createElement('div');
+        m.setAttribute('id', 'm_speaker');
+        m.setAttribute('onclick', 'hideSpeaker()');
+        setTimeout(() => {toggled = true;}, 700);
+        m.innerHTML = data;
+        speak.appendChild(m);
+        fullpage_api.setAllowScrolling(false);
+        fullpage_api.setKeyboardScrolling(false);
+    }
+    function hideSpeaker(event) {
+        if(toggled) {
+            fullpage_api.setAllowScrolling(true);
+            fullpage_api.setKeyboardScrolling(true);
+            var current = document.getElementById('m_speaker');
+            current.remove();
+            toggled = false;
+        }
+    }
+</script>
+{{end}}
+
+{{define "fullpage"}}
+    <div class="section" id="section0">
+        <div class="homelogo hidden">
+            <img src="img/logo.png"/>
+        </div>
+        <div class="homelogo">
+            <img src="img/logo.svg"/>
+        </div>
+    </div>
+    <div class="section center" id="section1">
+        <div class="Main container">
+            {{template "Main"}}
+        </div>
+    </div>
+    <!--<div class="section" id="section2">
+        <div class="container">
+            {{template "Schedule"}}
+        </div>
+    </div>-->
+    <div class="section" id="section3">
+        <div class="container">
+            {{template "Speakers" .SpeakersData}}
+        </div>
+    </div>
+    <div class="section center" id="section4">
+        <div class="container">
+            {{template "Partners" .PartnersData}}
+        </div>
+    </div>
+    <div class="section fp-auto-height" id="section5">
+        <div class="container">
+            {{template "Info"}}
+        </div>
+    </div>
+{{end}}
+
+{{define "menu"}}
+    <a onclick="fullpage_api.moveSectionDown()"><img alt="Go next slide" src="icon/down.svg"></a>
+    <a onclick="fullpage_api.moveTo(2)"><img alt="" src="icon/schedule.svg"><span>Подробнее</span></a>
+    <a onclick="fullpage_api.moveTo(3)"><img alt="" src="icon/speaker.svg"><span>Спикеры</span></a>
+    <a onclick="fullpage_api.moveTo(4)"><img alt="" src="icon/partner.svg"><span>Партнеры</span></a>
+{{end}}
+
+{{define "Main"}}
+<section class="main">
+    <h1>Что?</h1>
+    <p class="title">Всероссийская онлайн-конференция Студенческого<br> совета МГУ с международным участием<br> о разрушении популярных экологических мифов.</p>
+    <p>Просвещайтесь с нами!</p>
+    <h1>Где?</h1>
+    <div class="inline">
+        <a class="btn btn-white btn-icon" href="https://vk.com/ecology.restarting">
+            <img class="icon" alt="" src="icon/vk.svg">
+            ВКонтакте
+        </a>
+        <a class="btn btn-white btn-icon" href="https://studsovet-lomonosov.timepad.ru/event/1754291/#register">
+            <img class="icon" alt="" src="icon/timepad.png">
+            Зарегистрироваться TimePad
+        </a>
+    </div>
+    <h1>Когда?</h1>
+    <p>25-26 сентября 2021</p>
+    <hr>
+    <p>
+        А пока можете посмотреть на наши предыдущие конференции:
+        <br>
+        <a href="https://ecoguildtalks.ru/">EcoGuild Talks (август 2020)</a>
+        <br>
+        <a href="https://ecoandthecity.ru/">Eco and the City (март 2021)</a>
+    </p>
+</section>
+{{end}}
+
+{{define "Card"}}
+{{end}}
+
+{{define "Schedule"}}
+<h1>Программа</h1>
+<h2>В разработке</h2>
+{{end}}
+
+{{define "Quiz"}}
+<h1>Quiz</h1>
+<h2>В разработке</h2>
+{{end}}
+
+{{define "Info"}}
+<div class="info">
+    <p>
+        <a href="licenses.html">Licenses</a> for used materials
+    </p>
+    <p>
+        Site created by <a href="https://github.com/psydvl" target="_blank">@psydvl</a> 
+        for <a href="https://github.com/EcoMSU" target="_blank">@EcoMSU</a>
+    </p>
+</div>
+{{end}}

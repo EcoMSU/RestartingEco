@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="{{.PageData.Lang}}">
+<head>
+    {{with .PageData.Share}}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Title}}{{.TitleAdd}}</title>
+    <link href="favicon.png" rel="icon" type="image/png"/>
+    <meta name="title" content="{{.Title}}">
+    <meta name="description" content="{{.Desc}}">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{.URL}}">
+    <meta property="og:title" content="{{.Title}}">
+    <meta property="og:description" content="{{.Desc}}">
+    <meta property="og:image" content="img/preview.png">
+    <meta property="vk:image" content="img/preview.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{.URL}}">
+    <meta property="twitter:title" content="{{.Title}}">
+    <meta property="twitter:description" content="{{.Desc}}">
+    <meta property="twitter:image" content="img/preview.png">
+
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.css"
+        integrity="sha512-4rPgyv5iG0PZw8E+oRdfN/Gq+yilzt9rQ8Yci2jJ15rAyBmF0HBE4wFjBkoB72cxBeg63uobaj1UcNt/scV93w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.js"
+        integrity="sha512-gSf3NCgs6wWEdztl1e6vUqtRP884ONnCNzCpomdoQ0xXsk06lrxJsR7jX5yM/qAGkPGsps+4bLV5IEjhOZX+gg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/vendors/scrolloverflow.min.js"
+        integrity="sha512-pYyQWhzi2lV+RM4GmaUA56VPL48oLVvsHmP9tuQ8MaZMDHomVEDjXXnfSVKXayy+wLclKPte0KbsuVoFImtE7w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    {{end}}
+    {{template "head"}}
+</head>
+<body>
+    <div id="fullpage">
+        {{template "fullpage" .}}
+    </div>
+    <div id="menu">
+        {{template "menu"}}
+    </div>
+    <script>
+        const fp = new fullpage('#fullpage', {
+            sectionsColor: colors,
+            continuousVertical: true,
+            lockAnchors: true,
+            scrollOverflow: true,
+            licenseKey: 'null' //will be added
+        });
+    </script>
+    {{template "footer"}}
+</body>
+</html>

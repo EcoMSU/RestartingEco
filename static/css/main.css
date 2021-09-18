@@ -1,0 +1,287 @@
+@font-face {
+    font-family: 'Inter';
+    font-style:  normal;
+    font-weight: 400;
+    font-display: fallback;
+    src: url("/fonts/Inter-Regular.woff2") format("woff2"),
+    url("/fonts/Inter-Regular.woff") format("woff");
+}
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("/fonts/Inter-Bold.woff2") format("woff2"),
+    url("/fonts/Inter-Bold.woff") format("woff");
+}
+@font-face {
+    font-family: 'Inter';
+    font-style:  normal;
+    font-weight: 900;
+    font-display: swap;
+    src: url("/fonts/Inter-Black.woff2") format("woff2"),
+    url("/fonts/Inter-Black.woff") format("woff");
+}
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: url("/img/index.jpg");
+    background: url("/img/index.webp");
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+}
+
+pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.hidden {
+    display: none !important;
+}
+.inline {
+    display: inline;
+}
+.center {
+    text-align: center;
+}
+.square {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+}
+.square:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+}
+.space {
+    display: block;
+    height: 5rem;
+    width: 100%;
+}
+
+span.icon {
+    height: 1em;
+    width: 1em;
+}
+
+#menu {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: right;
+    align-content: center;
+    width: 100%;
+    max-width: 540px;
+    z-index: 200;
+}
+#menu a {
+    color: #fff;
+    display: inline;
+    padding: 1em;
+}
+#menu img {
+    max-height: 2em;
+    display: block;
+    margin: 0 auto;
+}
+#menu span {
+    font-size: 1em;
+    -webkit-text-stroke: .2px #000;
+}
+
+@media (max-width: 768px) {
+    #menu a {
+        padding: 0.8em;
+    }
+    #menu img {
+        max-height: 2.5em;
+    }
+    #menu span {
+        font-size: 1.2em;
+    }
+}
+@media (max-width: 640px) {
+    #menu a {
+        padding: 0.5em;
+    }
+    #menu img {
+        max-height: 2em;
+    }
+    #menu span {
+        font-size: 1em;
+    }
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    margin-right: auto;
+    margin-left: auto;
+}
+@media (min-width: 576px) {
+    .container {
+        width: 540px;
+    }
+}
+@media (min-width: 768px) {
+    .container {
+        width: 720px;
+    }
+}
+@media (min-width: 992px) {
+    .container {
+        width: 800px;
+    }
+}
+@media (min-width: 1200px) {
+    .container {
+        width: 1140px;
+    }
+}
+@media (min-width: 1400px) {
+    .container {
+        width: 1320px;
+    }
+}
+
+.card {
+    position: relative;
+    background: #fff;
+    -moz-border-radius: 2rem;
+    border-radius: 2rem;
+    display: block;
+    padding: 1rem;
+}
+@media (max-width: 860px) {
+    .card {
+        padding:.5rem
+    }
+}
+
+.btn {
+    display: inline-block;
+    margin: .1rem;
+    padding: .5em .75em;
+    -moz-border-radius: .25em;
+    border-radius: .25em;
+    color: #fff;
+    background-color: #000000;
+    border-color: #000000;
+    text-decoration: none;
+    font-weight: 400;
+    line-height: 1.25;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.btn.btn-white {
+    color: #000;
+    background-color: #fff;
+    border-color: #fff;
+}
+.btn.btn-icon {
+    padding-left: 2.5em;
+    position: relative;
+}
+.btn.btn-icon img.icon {
+    position: absolute;
+    left: .5em;
+    top: .35em;
+    max-height: 1.5em;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    text-decoration: underline dotted;
+}
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    border-radius: 6px;
+
+    position: absolute;
+    z-index: 1;
+    bottom: 110%;
+    left: 50%;
+    margin-left: -100px;
+
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+.tablabel {
+    margin-top: 8px;
+    margin-left: 4px;
+    display: inline-block;
+    border: 3px rgba(204,204,204,0.6) solid;
+}
+
+.tab {
+    display: none;
+    min-height: 50vh;
+    overflow: scroll;
+}
+.tab > h2 {
+    text-align: center;
+}
+.tab > pre {
+    margin: auto;
+    width: fit-content;
+}
+
+.tabcheck:checked ~ section {
+    display: block;
+}
+
+.homelogo {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: right;
+    align-content: center;
+    width: 100%;
+    max-width: 540px;
+}
+.homelogo img {
+    width: 100%;
+    padding: 79px 92px;
+}

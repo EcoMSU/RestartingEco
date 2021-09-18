@@ -1,0 +1,63 @@
+{{define "head"}}
+<script>
+    var colors = ['transparent', '#1BBC9B', '#6d4c41', '#6d4c41', '#ffc400', '#1de9b6', '#3f51b5'];
+</script>
+{{end}}
+
+{{define "footer"}}
+{{end}}
+
+{{define "fullpage"}}
+<div class="section" id="section0">
+    <div class="card">
+        <h1>Licenses | <a href="/">Back to main site</a></h1>
+    </div>
+    <div class="homelogo">
+        <img src="img/logo.svg"/>
+    </div>
+</div>
+<div class="section center" id="section1">
+    <img src="img/index.jpg" style="max-width: 100%; width: 500px;">
+    <p>
+        Photo by 
+        <a href="https://www.pexels.com/@brandon-montrone-230847?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexelshttps://www.pexels.com/@brandon-montrone-230847?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels">Brandon Montrone</a> 
+        from <a href="https://www.pexels.com/photo/forest-sunrise-view-1179237/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels">Pexels</a>
+    </p>
+    <small><a href="https://www.pexels.com/license/">License: free to use</a></small>
+</div>
+<div class="section" id="section2">
+    <div class="card">
+        <h2>fullPage.js <small>(GPLv3)</small></h2>
+        <a href="https://alvarotrigo.com/fullPage">Site</a>
+        <a href="https://github.com/alvarotrigo/fullpage.js">Github</a><br><br>
+        {{template "fullPage"}}
+    </div>
+</div>
+<div class="section" id="section3">
+    <div class="card">
+        <h2>Inter font <small>(SIL OPEN FONT LICENSE Version 1.1)</small></h2>
+        <a href="https://github.com/rsms/inter">Github</a><br><br>
+        {{template "Inter"}}
+    </div>
+</div>
+<div class="section center" id="section4">
+    <h2>Social icons</h2>
+    <div><div class="btn btn-white btn-icon"><img class="icon" alt="" src="icon/vk.svg">VKontakte</div> icon logo from <a href="https://vk.com/brand">VK Brand Resources</a></div>
+    <br><span>Overwrited using <a href="https://jakearchibald.github.io/svgomg/">SVGOMG</a></span>
+</div>
+<div class="section center" id="section5">
+    <h2>Menu icons</h2>
+    <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+    <div>Icons made by <a href="https://www.flaticon.com/authors/catkuro" title="catkuro">catkuro</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+    <br><b>Photo link <a href="https://www.flaticon.com/free-icon/man-in-suit-and-tie_3729">https://www.flaticon.com/free-icon/man-in-suit-and-tie_3729</a></b>
+    <br><b>Photo link <a href="https://www.flaticon.com/free-icon/calendar_833593">https://www.flaticon.com/free-icon/calendar_833593</a></b>
+    <br><b>Photo link <a href="https://www.flaticon.com/free-icon/business_2329466">https://www.flaticon.com/free-icon/business_2329466</a></b>
+    <br><span>Overwrited using <a href="https://jakearchibald.github.io/svgomg/">SVGOMG</a></span>
+</div>
+{{end}}
+
+{{define "menu"}}
+    <a onclick="fullpage_api.moveSectionDown()" class="card" style="background-color: #ccc;">
+        <img alt="Go next slide" src="icon/down.svg">
+    </a>
+{{end}}
