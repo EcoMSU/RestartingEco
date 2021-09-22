@@ -19,7 +19,7 @@ func LicensesInit() Licenses {
 func templatingLicenses(data *Licenses) bytes.Buffer {
 	var buf bytes.Buffer
 
-	t, err := template.ParseFiles("tmpl/main.tmpl", "tmpl/licenses.tmpl", "tmpl/license_texts.tmpl")
+	t, err := template.ParseFiles("tmpl/main.tmpl", "tmpl/licenses.tmpl")
 	if err != nil {
 		logger.Println(err)
 	}

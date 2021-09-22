@@ -283,5 +283,10 @@ span.icon {
 }
 .homelogo img {
     width: 100%;
-    padding: 79px 92px;
+    padding: 3.5rem 4rem;
+}
+@media (max-width: 576px) {
+    .homelogo img {
+        padding: 3.5rem 1rem;
+    }
 }
