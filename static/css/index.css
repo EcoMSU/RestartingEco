@@ -282,6 +282,7 @@
 }
 .partners > .item p {
     text-decoration: underline;
+    color: black;
 }
 
 .partners-old {
