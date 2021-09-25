@@ -34,11 +34,22 @@ type PartnersData struct {
 	PartnersList []Partner
 }
 
+type ScheduleLine struct {
+	Time string
+	Speaker string
+}
+
+type Schedule struct {
+	Saturday []ScheduleLine
+	Sunday []ScheduleLine
+}
+
 type Index struct {
 	PageData PageData
 	Header Header
 	SpeakersData SpeakersData
 	PartnersData PartnersData
+	Schedule Schedule
 }
 
 func IndexInit() Index {
@@ -69,6 +80,18 @@ func templatingIndex(data *Index) bytes.Buffer {
 
 	partnersJson, _ := ioutil.ReadFile("json/partners.json")
 	err = json.Unmarshal([]byte(partnersJson), &data.PartnersData.PartnersList)
+	if err != nil {
+		logger.Println(err)
+	}
+
+	saturdayJson, _ := ioutil.ReadFile("json/saturday.json")
+	err = json.Unmarshal([]byte(saturdayJson), &data.Schedule.Saturday)
+	if err != nil {
+		logger.Println(err)
+	}
+
+	sundayJson, _ := ioutil.ReadFile("json/sunday.json")
+	err = json.Unmarshal([]byte(sundayJson), &data.Schedule.Sunday)
 	if err != nil {
 		logger.Println(err)
 	}

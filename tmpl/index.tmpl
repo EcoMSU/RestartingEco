@@ -1,8 +1,7 @@
 {{define "head"}}
 <link rel="stylesheet" type="text/css" href="css/index.css">
 <script>
-    //var colors = ['transparent', '#ffc400', '#1BBC9B', '#1de9b6', '#3f51b5', '#6d4c41'];
-    var colors = ['transparent', '#ffc400', '#1de9b6', '#3f51b5', '#6d4c41'];
+    var colors = ['transparent', '#ffc400', '#1BBC9B', '#1de9b6', '#3f51b5', '#6d4c41'];
 </script>
 {{end}}
 
@@ -45,11 +44,11 @@
             {{template "Main"}}
         </div>
     </div>
-    <!--<div class="section" id="section2">
-        <div class="container">
-            {{template "Schedule"}}
+    <div class="section center" id="section2">
+        <div class="container schedule">
+            {{template "Schedule" .Schedule}}
         </div>
-    </div>-->
+    </div>
     <div class="section" id="section3">
         <div class="container">
             {{template "Speakers" .SpeakersData}}
@@ -70,8 +69,8 @@
 {{define "menu"}}
     <a onclick="fullpage_api.moveSectionDown()"><img alt="Go next slide" src="icon/down.svg"></a>
     <a onclick="fullpage_api.moveTo(2)"><img alt="" src="icon/schedule.svg"><span>Подробнее</span></a>
-    <a onclick="fullpage_api.moveTo(3)"><img alt="" src="icon/speaker.svg"><span>Спикеры</span></a>
-    <a onclick="fullpage_api.moveTo(4)"><img alt="" src="icon/partner.svg"><span>Партнеры</span></a>
+    <a onclick="fullpage_api.moveTo(4)"><img alt="" src="icon/speaker.svg"><span>Спикеры</span></a>
+    <a onclick="fullpage_api.moveTo(5)"><img alt="" src="icon/partner.svg"><span>Партнеры</span></a>
 {{end}}
 
 {{define "Main"}}
@@ -107,13 +106,36 @@
 {{end}}
 
 {{define "Schedule"}}
-<h1>Программа</h1>
-<h2>В разработке</h2>
-{{end}}
-
-{{define "Quiz"}}
-<h1>Quiz</h1>
-<h2>В разработке</h2>
+<div class="day card red">
+    <h3>Суббота, 25.09</h3>
+    <table class="card">
+        <tr>
+            <th>Время начала</th>
+            <th>Спикер</th>
+        </tr>
+        {{range .Saturday}}
+        <tr>
+            <td>{{.Time}}</td>
+            <td>{{.Speaker}}</td>
+        </tr>
+        {{end}}
+    </table>
+</div>
+<div class="day card blue">
+    <h3>Воскресенье, 26.09</h3>
+    <table class="card">
+        <tr>
+            <th>Время начала</th>
+            <th>Спикер</th>
+        </tr>
+        {{range .Sunday}}
+        <tr>
+            <td>{{.Time}}</td>
+            <td>{{.Speaker}}</td>
+        </tr>
+        {{end}}
+    </table>
+</div>
 {{end}}
 
 {{define "Info"}}
