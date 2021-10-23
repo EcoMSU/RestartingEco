@@ -76,6 +76,13 @@
         ]
     },
     {
+        "name": "Илья Цигельницкий",
+        "img": "cigelnitskiy.jpg",
+        "desc": [
+            "Основатель проекта proEcoPen"
+        ]
+    },
+    {
         "name": "Юлия Марсель",
         "img": "marsel.jpg",
         "desc": [
@@ -171,13 +178,6 @@
         "img": "malyscheva.jpg",
         "desc": [
             "Руководитель экологического проекта Generation Eco"
-        ]
-    },
-    {
-        "name": "Илья Цигельницкий",
-        "img": "cigelnitskiy.jpg",
-        "desc": [
-            "Основатель проекта proEcoPen"
         ]
     }
 ]

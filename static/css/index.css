@@ -10,12 +10,14 @@
     font-size: 2rem;
 }
 .main p,
+.main b,
 .main .btn {
-    margin-top: .5rem;
-}
-.main p {
     font-size: 1.2rem;
     font-weight: 500;
+}
+.main a:not(.btn) {
+    color: black;
+    text-decoration: underline;
 }
 
 .section {
