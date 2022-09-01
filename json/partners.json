@@ -1,83 +1,98 @@
 [
     {
-        "name": "Федеральное агентство по делам молодежи (Росмолодежь)",
-        "img": "rosmol.svg",
-        "url": "https://myrosmol.ru/"
+        "id": "c918b403-7586-4911-b2a8-231f9eaf86d5",
+        "name": 0,
+        "img": 0,
+        "url": 0
     },
     {
-        "name": "Российская система качества (Роскачество)",
-        "img": "roskachestvo.svg",
-        "url": "https://roskachestvo.gov.ru/"
+        "id": "dee4cdd8-9ea4-4255-8880-39e0ba81cfc9",
+        "name": 0,
+        "img": 0,
+        "url": 0
     },
     {
-        "name": "Российский экологический оператор",
-        "img": "reo.svg",
-        "url": "https://reo.ru/"
+        "id": "3b4921ef-54c3-418c-bb1e-4d96f8e98ae3",
+        "name": 0,
+        "img": 0,
+        "url": 0
     },
     {
-        "name": "Аргументы и Факты",
-        "img": "aif.svg",
-        "url": "https://aif.ru/"
+        "id": "cf7cbbc4-ef8d-48cb-91a2-8f3146c4a17d",
+        "name": 0,
+        "img": 0,
+        "url": 0
     },
     {
-        "name": "МОСВОЛОНТЁР",
-        "img": "mosvolonteer.svg",
-        "url": "https://mosvolonter.ru"
+        "id": "b48fc179-2b85-4ac9-bda4-cdd538d5447a",
+        "name": 0,
+        "img": 0,
+        "url": 0
     },
     {
-        "name": "РусКлиматФонд",
-        "img": "rcf.png",
-        "url": "https://rusclimatefund.ru/",
-        "style": "padding: 2rem;"
+        "id": "eaf5d978-9bc7-4a7c-8acd-45ead7cb23c1",
+        "name": 0,
+        "img": 0,
+        "url": 0
     },
     {
-        "name": "Делай!",
-        "img": "delay.svg",
-        "url": "https://ecodelai.ru/"
+        "id": "2701a747-5395-4db6-9db6-7da6c095ac01",
+        "name": 0,
+        "img": 0,
+        "url": 0
     },
     {
-        "name": "AISEC",
-        "img": "aiesec-blue.png",
-        "url": "https://aiesec.org/"
+        "id": "43760ed2-563c-45f7-ae05-24c7c3c050c3",
+        "name": 0,
+        "img": 0,
+        "url": 0
     },
     {
-        "name": "SDSN Youth",
-        "img": "sdsn.png",
-        "url": "https://www.sdsnyouth.org/"
+        "id": "2dd10077-e273-4869-a3ee-e2c0bd58e2c1",
+        "name": 0,
+        "img": 0,
+        "url": 0
     },
     {
-        "name": "ПРОкачество",
-        "img": "proquality.svg",
-        "url": "https://kachestvo.pro/"
+        "id": "6b406a35-f997-4bc9-a308-d970373f9fda",
+        "name": 0,
+        "img": 0,
+        "url": 0
     },
     {
-        "name": "Студенческий союз МГУ имени М.В. Ломоносова",
-        "img": "studunion.jpg",
-        "url": "https://vk.com/studunion_msu"
+        "id": "e27048f8-8653-45c4-bef6-3ab3342cb936",
+        "name": 0,
+        "img": 0,
+        "url": 0
     },
     {
-        "name": "Ассоциация \"зеленых\" вузов России",
-        "img": "greenvuz.png",
-        "url": "http://зеленыевузы.рф/"
+        "id": "ff1fb7db-173f-4e6f-b2ca-3bb6373cd72c",
+        "name": 0,
+        "img": 0,
+        "url": 0
     },
     {
-        "name": "Green Wise",
-        "img": "greenwise.svg",
-        "url": "https://greenwise.ru/"
+        "id": "21103905-9451-46a0-b04d-135fa6a7ab7b",
+        "name": 0,
+        "img": 0,
+        "url": 0
     },
     {
-        "name": "Штаб эковолонтеров МГТУ Станкин",
-        "img": "shtab.svg",
-        "url": "https://stankin.ru/"
+        "id": "db4df1a9-25a8-47a2-9a7d-e2d7028226ad",
+        "name": 0,
+        "img": 0,
+        "url": 0
     },
     {
-        "name": "Молодежный клуб урбанистов",
-        "img": "urbanclub.png",
-        "url": "https://vk.com/msk_urban_club"
+        "id": "93e254f1-39c1-4401-b051-bfd43244c8ef",
+        "name": 0,
+        "img": 0,
+        "url": 0
     },
     {
-        "name": "Зеленый  патруль",
-        "img": "greenpatrol.png",
-        "url": "https://greenpatrol.ru/"
+        "id": "5efced60-225f-4579-a70f-dd6f5538d1b7",
+        "name": 0,
+        "img": 0,
+        "url": 0
     }
 ]
