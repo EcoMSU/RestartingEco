@@ -4,13 +4,13 @@
     <h1>Партнеры</h1>
 </div>
 <div class="partners">
-    {{$prefix := .PartnersPrefix}}
-    {{range .PartnersList}}
+    {{$prefix := .ImgPrefix}}
+    {{range .List}}
     <div class="item">
         <a class="card" href="{{.Url}}" target="_blank">
             <div class="square">
                 <div class="logo">
-                    <img alt="Логотип партнера {{.Name}}" src="{{$prefix}}{{.Img}}" class="square" {{if .Style}}style="{{.Style}}"{{end}}>
+                    <img alt="Логотип партнера {{.Name}}" src="{{$prefix}}{{.Img}}" class="square">
                 </div>
             </div>
             <p>{{.Name}}</p>
@@ -18,73 +18,5 @@
     </div>
     {{end}}
     <div class="space"></div>
-</div>
-<div class="partners-old card hidden">
-    <div class="item wide">
-        <img alt="Роскачество" src="img/partners/old/roskachestvo.svg">
-    </div>
-    <div class="item">
-        <img alt="Агенство стратегических инициатив" src="img/partners/old/asi.png">
-    </div>
-    <div class="item">
-        <img alt="Росмолодежь" src="img/partners/old/rosmol.svg">
-    </div>
-    <div class="item">
-        <img alt="Росконгресс" src="img/partners/old/roscongress.png">
-    </div>
-    <div class="item">
-        <img alt="АСР Центр" src="img/partners/old/center.png">
-    </div>
-    <div class="item">
-        <img alt="РБК КОНФЕРЕНЦИИ" src="img/partners/old/rbc.svg">
-    </div>
-    <div class="item">
-        <img alt="Мастера Гостеприимства" src="img/partners/old/mastera.png">
-    </div>
-    <div class="item">
-        <img alt="3DBIO" src="img/partners/old/3dbio.png">
-    </div>
-    <div class="item">
-        <img alt="PRO качество" src="img/partners/old/proquality.svg">
-    </div>
-    <div class="item">
-        <img alt="Центр Международного Продвижения" src="img/partners/old/cmp.png">
-    </div>
-    <div class="item">
-        <img alt="90УГЛТУ" src="img/partners/old/90ugltu.svg">
-    </div>
-    <div class="item">
-        <img alt="Муравейник" src="img/partners/old/muraveynik.png">
-    </div>
-    <div class="item">
-        <img alt="Центр Содействия Молодым Специалистам" src="img/partners/old/csms.svg">
-    </div>
-    <div class="item">
-        <img alt="AEROSPACE-AGRO" src="img/partners/old/aero.png">
-    </div>
-    <div class="item">
-        <img alt="ECOCUP" src="img/partners/old/ecocup.png">
-    </div>
-    <div class="item">
-        <img alt="Зеленый драйвер" src="img/partners/old/greendriver.png">
-    </div>
-    <div class="item">
-        <img alt="Business Priority" src="img/partners/old/bp.png">
-    </div>
-    <div class="item">
-        <img alt="#МОСЭКО" src="img/partners/old/moseco.png">
-    </div>
-    <div class="item">
-        <img alt="Сборка" src="img/partners/old/sborka.svg">
-    </div>
-    <div class="item">
-        <img alt="МАСТ" src="img/partners/old/mast.png">
-    </div>
-    <div class="item">
-        <img alt="WACHO" src="img/partners/old/wacho.png">
-    </div>
-    <div class="divider"></div>
-    <div class="divider"></div>
-    <div class="divider"></div>
 </div>
 {{end}}

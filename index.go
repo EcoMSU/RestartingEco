@@ -4,112 +4,155 @@ import (
 	"bytes"
 	"encoding/json"
 	"html/template"
+	"io"
 	"io/ioutil"
 	"net/http"
+	"path"
+	"sync"
+
+	"github.com/EcoMSU/data"
 )
 
-type Header struct {
-	Title string
-	Desc string
+type (
+	Header struct {
+		Title string
+		Desc  string
+	}
+
+	SpeakersData struct {
+		ImgPrefix string
+		List      []data.ExportSpeaker
+	}
+
+	PartnersData struct {
+		ImgPrefix string
+		List      []data.ExportPartner
+	}
+
+	ScheduleLine struct {
+		Time    string
+		Speaker string
+	}
+
+	Schedule struct {
+		Saturday []ScheduleLine
+		Sunday   []ScheduleLine
+	}
+
+	IndexData struct {
+		PageData PageData
+		Header   Header
+		Speakers SpeakersData
+		Partners PartnersData
+		Schedule Schedule
+	}
+
+	Index struct {
+		built bool
+		raw   []byte
+		wg    *sync.WaitGroup
+		data  IndexData
+	}
+)
+
+func NewIndex(build string) *Index {
+	page := new(Index)
+	page.init()
+	page.wg.Add(1)
+	go page.load(build)
+	return page
 }
 
-type Speaker struct {
-	Name string
-	Img string
-	Desc []string
-}
-type SpeakersData struct {
-	SpeakersPrefix string
-	SpeakersList []Speaker
-}
-
-type Partner struct {
-	Name string
-	Img string
-	Url string
-	Style template.CSS
-}
-type PartnersData struct {
-	PartnersPrefix string
-	PartnersList []Partner
-}
-
-type ScheduleLine struct {
-	Time string
-	Speaker string
-}
-
-type Schedule struct {
-	Saturday []ScheduleLine
-	Sunday []ScheduleLine
-}
-
-type Index struct {
-	PageData PageData
-	Header Header
-	SpeakersData SpeakersData
-	PartnersData PartnersData
-	Schedule Schedule
-}
-
-func IndexInit() Index {
-	return Index{
+func (i *Index) init() {
+	i.data = IndexData{
 		PageData: DataInit(""),
 		Header: Header{
 			Title: "Экология:",
-			Desc: "Перезагрузка",
+			Desc:  "Перезагрузка",
 		},
-		SpeakersData: SpeakersData{
-			SpeakersPrefix: "img/speakers/",
+		Speakers: SpeakersData{
+			ImgPrefix: "img/speakers/",
 		},
-		PartnersData: PartnersData{
-			PartnersPrefix: "img/partners/",
+		Partners: PartnersData{
+			ImgPrefix: "img/partners/",
 		},
 	}
+	i.wg = new(sync.WaitGroup)
 }
 
-func templatingIndex(data *Index) bytes.Buffer {
-	var buf bytes.Buffer
+func (i *Index) load(build string) {
+	var rawSpeakers []data.ImportSpeaker
+	var rawPartners []data.ImportPartner
 	var err error
-	
-	speakersJson, _ := ioutil.ReadFile("json/speakers.json")
-	err = json.Unmarshal([]byte(speakersJson), &data.SpeakersData.SpeakersList)
-	if err != nil {
-		logger.Println(err)
-	}
-
-	partnersJson, _ := ioutil.ReadFile("json/partners.json")
-	err = json.Unmarshal([]byte(partnersJson), &data.PartnersData.PartnersList)
-	if err != nil {
-		logger.Println(err)
-	}
 
 	saturdayJson, _ := ioutil.ReadFile("json/saturday.json")
-	err = json.Unmarshal([]byte(saturdayJson), &data.Schedule.Saturday)
+	err = json.Unmarshal(saturdayJson, &i.data.Schedule.Saturday)
 	if err != nil {
 		logger.Println(err)
 	}
 
 	sundayJson, _ := ioutil.ReadFile("json/sunday.json")
-	err = json.Unmarshal([]byte(sundayJson), &data.Schedule.Sunday)
+	err = json.Unmarshal(sundayJson, &i.data.Schedule.Sunday)
 	if err != nil {
 		logger.Println(err)
 	}
 
-	t, err := template.ParseFiles("tmpl/main.tmpl", "tmpl/index.tmpl", "tmpl/speakers.tmpl", "tmpl/partners.tmpl")
-	if err != nil {
+	speakersJson, _ := ioutil.ReadFile("json/speakers.json")
+	if err = json.Unmarshal(speakersJson, &rawSpeakers); err != nil {
 		logger.Println(err)
 	}
-	ruTmpl := template.Must(t, err)
-	err = ruTmpl.Execute(&buf, &data)
-	if err != nil {
+	if i.data.Speakers.List, err = data.GetSpeakers(rawSpeakers, path.Join(build, i.data.Speakers.ImgPrefix), ""); err != nil {
 		logger.Println(err)
 	}
-	return buf
+
+	partnersJson, _ := ioutil.ReadFile("json/partners.json")
+	err = json.Unmarshal(partnersJson, &rawPartners)
+	if err != nil {
+		logger.Fatalln(err)
+	}
+	if i.data.Partners.List, err = data.GetPartners(rawPartners, path.Join(build, i.data.Partners.ImgPrefix), ""); err != nil {
+		logger.Fatalln(err)
+	}
+
+	i.wg.Done()
 }
 
-func handleIndex(w http.ResponseWriter, _ *http.Request) {
-	Page := IndexInit()
-	tmpl := templatingIndex(&Page)
-	w.Write(tmpl.Bytes())
+func (i *Index) reBuild() (err error) {
+	w := new(bytes.Buffer)
+	i.wg.Wait()
+	err = template.Must(
+		template.ParseFiles("tmpl/main.tmpl", "tmpl/index.tmpl", "tmpl/speakers.tmpl", "tmpl/partners.tmpl"),
+	).Execute(w, &i.data)
+	if err == nil {
+		i.raw = w.Bytes()
+		i.built = true
+	}
+	return err
+}
+
+func (i *Index) Build() (io.Reader, error) {
+	var err error
+	if !i.built {
+		err = i.reBuild()
+	}
+	return bytes.NewReader(i.raw), err
+}
+
+func (i *Index) Handle(w http.ResponseWriter, _ *http.Request) {
+	var err error
+	if !i.built {
+		err = i.reBuild()
+	}
+	if err == nil {
+		logger.Println("Index page loaded")
+		_, err = w.Write(i.raw)
+	}
+	if err != nil {
+		logger.Panicln(err)
+	}
+}
+
+func (i *Index) Watch() func() {
+	logger.Fatalln("Not implemented yet")
+	return nil
 }

@@ -1,8 +1,8 @@
 {{define "Speakers"}}
 <div class="speakers">
     <div class="space"></div>
-    {{$prefix := .SpeakersPrefix}}
-    {{range .SpeakersList}}
+    {{$prefix := .ImgPrefix}}
+    {{range .List}}
     <div class="item" onclick="showSpeaker(event, this.innerHTML);">
         <div class="card">
             <div class="photo">
