@@ -49,7 +49,7 @@ func watch() {
 
 func run() {
 	var server *http.ServeMux
-	site := NewSite()
+	site := NewSite(RunMode)
 	logger.Println("Running...")
 
 	tempbuild, err := os.MkdirTemp("", "")
@@ -61,34 +61,21 @@ func run() {
 
 	server = http.NewServeMux()
 
-	server.Handle("/css/", http.StripPrefix(
-		"/css/",
-		http.FileServer(http.Dir("./static/css")),
-	))
-	server.Handle("/fonts/", http.StripPrefix(
-		"/fonts/",
-		http.FileServer(http.Dir("./static/fonts")),
-	))
-	server.Handle("/img/partners/",
-		http.FileServer(http.Dir(tempbuild)),
-	)
-	server.Handle("/img/speakers/",
-		http.FileServer(http.Dir(tempbuild)),
-	)
-	server.Handle("/img/", http.StripPrefix(
-		"/img/",
-		http.FileServer(http.Dir("./static/img")),
-	))
-	server.Handle("/icon/", http.StripPrefix(
-		"/icon/",
-		http.FileServer(http.Dir("./static/icon")),
-	))
+	var static [][3]string = [][3]string{
+		{"/css/", "/css/", "./static/css"},
+		{"/fonts/", "/fonts/", "./static/fonts"},
+		{"/img/partners/", "", tempbuild},
+		{"/img/speakers/", "", tempbuild},
+		{"/img/", "/img/", "./static/img"},
+		{"/icon/", "/icon/", "./static/icon"},
+	}
+	site.SetStatic(static)
 
-	site.Add("/licenses.html", NewLicenses())
-	site.Add("/", NewIndex(tempbuild))
+	site.AddPage("/licenses.html", NewLicenses())
+	site.AddPage("/", NewIndex(tempbuild))
 	site.ServeTo(server)
 
-	log.Fatal(http.ListenAndServe(":8080", server))
+	log.Fatal(site.Run())
 }
 
 func empty() {

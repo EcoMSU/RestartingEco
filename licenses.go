@@ -18,14 +18,10 @@ type (
 	}
 )
 
-func NewLicenses() *Licenses {
-	page := new(Licenses)
-	page.init()
+func NewLicenses() (page *Licenses) {
+	page = new(Licenses)
+	page.data.PageData = DataInit(" | Licenses")
 	return page
-}
-
-func (l *Licenses) init() {
-	l.data.PageData = DataInit(" | Licenses")
 }
 
 func (l *Licenses) reBuild() (err error) {
