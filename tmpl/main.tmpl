@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="{{.PageData.Lang}}">
+<html lang="ru">
 <head>
-    {{with .PageData.Share}}
+    {{with .SiteData}}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{.Title}}{{.TitleAdd}}</title>
+    <title>{{.Title}}</title>
     <link href="favicon.png" rel="icon" type="image/png"/>
-    <meta name="title" content="{{.Title}}{{.TitleAdd}}">
+    <meta name="title" content="{{.Title}}">
     <meta name="description" content="{{.Desc}}">
 
     <!-- Open Graph / Facebook -->
@@ -23,6 +23,7 @@
     <meta property="twitter:title" content="{{.Title}}">
     <meta property="twitter:description" content="{{.Desc}}">
     <meta property="twitter:image" content="img/preview.png">
+    {{end}}
 
     <link rel="stylesheet" type="text/css" href="css/main.css">
 
@@ -36,7 +37,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/vendors/scrolloverflow.min.js"
         integrity="sha512-pYyQWhzi2lV+RM4GmaUA56VPL48oLVvsHmP9tuQ8MaZMDHomVEDjXXnfSVKXayy+wLclKPte0KbsuVoFImtE7w=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    {{end}}
+
     {{template "head"}}
 </head>
 <body>

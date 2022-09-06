@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"io"
 	"log"
 	"net/http"
 	"os"
@@ -13,11 +12,39 @@ import (
 
 var logger *log.Logger
 
+func prepare() (s *site, err error) {
+	var buildPath string
+	buildPath, err = filepath.Abs("./build")
+	os.MkdirAll(buildPath, os.ModePerm)
+
+	s = NewSite(SiteData{
+		Title: "Экология: Перезагрузка",
+		Desc:  "Всероссийская онлайн-конференция Студенческого совета МГУ с международным участием о разрушении популярных экологических мифов.",
+		URL:   "https://RestartingEco.ru/",
+	})
+	logger.Println("Running...")
+
+	s.SetStatic([][3]string{
+		{"/css/", "/css/", "./static/css"},
+		{"/fonts/", "/fonts/", "./static/fonts"},
+		{"/img/partners/", "/img/partners/", "./build/img/partners/"},
+		{"/img/speakers/", "/img/speakers/", "./build/img/speakers/"},
+		{"/img/", "/img/", "./static/img"},
+		{"/icon/", "/icon/", "./static/icon"},
+	})
+
+	s.AddPage("licenses.html", NewLicenses(s.SiteData))
+	s.AddPage("index.html", NewIndex(buildPath, s.SiteData))
+	s.AddAlias("", "index.html")
+	return
+}
+
 func build() (err error) {
-	var data io.Reader
 	var buildPath string
 
 	logger.Println("Start build")
+
+	s, err := prepare()
 
 	// Move static
 	buildPath, err = filepath.Abs("./build")
@@ -26,20 +53,7 @@ func build() (err error) {
 		log.Fatalln("Copy static failed")
 		return
 	}
-
-	IndexPage := NewIndex(buildPath)
-	data, err = IndexPage.Build()
-
-	index_html, _ := os.Create("build/index.html")
-	defer index_html.Close()
-	_, err = io.Copy(index_html, data)
-
-	LincensesPage := NewLicenses()
-	data, err = LincensesPage.Build()
-
-	licenses_html, _ := os.Create("build/licenses.html")
-	defer licenses_html.Close()
-	_, err = io.Copy(licenses_html, data)
+	err = s.Build(buildPath)
 	return
 }
 
@@ -49,33 +63,18 @@ func watch() {
 
 func run() {
 	var server *http.ServeMux
-	site := NewSite(RunMode)
-	logger.Println("Running...")
+	var err error
 
-	tempbuild, err := os.MkdirTemp("", "")
+	s, err := prepare()
 	if err != nil {
-		logger.Fatal(err)
+		log.Fatal(err)
+		return
 	}
-	logger.Println("Temp directory for build", tempbuild)
-	defer os.RemoveAll(tempbuild)
 
 	server = http.NewServeMux()
+	s.ServeTo(server)
 
-	var static [][3]string = [][3]string{
-		{"/css/", "/css/", "./static/css"},
-		{"/fonts/", "/fonts/", "./static/fonts"},
-		{"/img/partners/", "", tempbuild},
-		{"/img/speakers/", "", tempbuild},
-		{"/img/", "/img/", "./static/img"},
-		{"/icon/", "/icon/", "./static/icon"},
-	}
-	site.SetStatic(static)
-
-	site.AddPage("/licenses.html", NewLicenses())
-	site.AddPage("/", NewIndex(tempbuild))
-	site.ServeTo(server)
-
-	log.Fatal(site.Run())
+	log.Fatal(s.Run())
 }
 
 func empty() {
@@ -96,7 +95,7 @@ func init() {
 }
 
 func main() {
-	if len(os.Args) != 1 {
+	if len(os.Args) > 1 {
 		logger.Println(os.Args[1], "option found")
 		switch os.Args[1] {
 		case "watch":

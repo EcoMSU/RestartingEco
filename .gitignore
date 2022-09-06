@@ -1,3 +1,4 @@
 static/img/*/source
 static/img/*/*/
 static/*.html
+build

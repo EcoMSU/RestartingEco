@@ -40,11 +40,11 @@ type (
 	}
 
 	IndexData struct {
-		PageData PageData
-		Header   Header
+		SiteData
+		Header
 		Speakers SpeakersData
 		Partners PartnersData
-		Schedule Schedule
+		Schedule
 	}
 
 	Index struct {
@@ -55,17 +55,10 @@ type (
 	}
 )
 
-func NewIndex(build string) *Index {
+func NewIndex(build string, sd SiteData) *Index {
 	page := new(Index)
-	page.init()
-	page.wg.Add(1)
-	go page.load(build)
-	return page
-}
-
-func (i *Index) init() {
-	i.data = IndexData{
-		PageData: DataInit(""),
+	page.data = IndexData{
+		SiteData: sd,
 		Header: Header{
 			Title: "Экология:",
 			Desc:  "Перезагрузка",
@@ -77,7 +70,10 @@ func (i *Index) init() {
 			ImgPrefix: "img/partners/",
 		},
 	}
-	i.wg = new(sync.WaitGroup)
+	page.wg = new(sync.WaitGroup)
+	page.wg.Add(1)
+	go page.load(build)
+	return page
 }
 
 func (i *Index) load(build string) {

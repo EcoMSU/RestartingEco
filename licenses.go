@@ -9,7 +9,7 @@ import (
 
 type (
 	LicensesData struct {
-		PageData
+		SiteData
 	}
 	Licenses struct {
 		built bool
@@ -18,9 +18,10 @@ type (
 	}
 )
 
-func NewLicenses() (page *Licenses) {
+func NewLicenses(sd SiteData) (page *Licenses) {
 	page = new(Licenses)
-	page.data.PageData = DataInit(" | Licenses")
+	sd.Title = sd.Title + " | Licenses"
+	page.data.SiteData = sd
 	return page
 }
 
