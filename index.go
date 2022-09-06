@@ -10,7 +10,7 @@ import (
 	"path"
 	"sync"
 
-	"github.com/EcoMSU/data"
+	"github.com/EcoMSU/emdb"
 )
 
 type (
@@ -21,12 +21,12 @@ type (
 
 	SpeakersData struct {
 		ImgPrefix string
-		List      []data.ExportSpeaker
+		List      []emdb.ExportSpeaker
 	}
 
 	PartnersData struct {
 		ImgPrefix string
-		List      []data.ExportPartner
+		List      []emdb.ExportPartner
 	}
 
 	ScheduleLine struct {
@@ -81,8 +81,8 @@ func (i *Index) init() {
 }
 
 func (i *Index) load(build string) {
-	var rawSpeakers []data.ImportSpeaker
-	var rawPartners []data.ImportPartner
+	var rawSpeakers []emdb.ImportSpeaker
+	var rawPartners []emdb.ImportPartner
 	var err error
 
 	saturdayJson, _ := ioutil.ReadFile("json/saturday.json")
@@ -101,7 +101,7 @@ func (i *Index) load(build string) {
 	if err = json.Unmarshal(speakersJson, &rawSpeakers); err != nil {
 		logger.Println(err)
 	}
-	if i.data.Speakers.List, err = data.GetSpeakers(rawSpeakers, path.Join(build, i.data.Speakers.ImgPrefix), ""); err != nil {
+	if i.data.Speakers.List, err = emdb.GetSpeakers(rawSpeakers, path.Join(build, i.data.Speakers.ImgPrefix), ""); err != nil {
 		logger.Println(err)
 	}
 
@@ -110,7 +110,7 @@ func (i *Index) load(build string) {
 	if err != nil {
 		logger.Fatalln(err)
 	}
-	if i.data.Partners.List, err = data.GetPartners(rawPartners, path.Join(build, i.data.Partners.ImgPrefix), ""); err != nil {
+	if i.data.Partners.List, err = emdb.GetPartners(rawPartners, path.Join(build, i.data.Partners.ImgPrefix), ""); err != nil {
 		logger.Fatalln(err)
 	}
 
