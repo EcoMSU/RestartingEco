@@ -11,6 +11,7 @@ import (
 	"sync"
 
 	"github.com/EcoMSU/emdb"
+	"github.com/EcoMSU/sef"
 )
 
 type (
@@ -40,7 +41,7 @@ type (
 	}
 
 	IndexData struct {
-		SiteData
+		sef.SiteData
 		Header
 		Speakers SpeakersData
 		Partners PartnersData
@@ -55,7 +56,7 @@ type (
 	}
 )
 
-func NewIndex(build string, sd SiteData) *Index {
+func NewIndex(build string, sd sef.SiteData) *Index {
 	page := new(Index)
 	page.data = IndexData{
 		SiteData: sd,

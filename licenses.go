@@ -5,11 +5,13 @@ import (
 	"html/template"
 	"io"
 	"net/http"
+
+	"github.com/EcoMSU/sef"
 )
 
 type (
 	LicensesData struct {
-		SiteData
+		sef.SiteData
 	}
 	Licenses struct {
 		built bool
@@ -18,9 +20,9 @@ type (
 	}
 )
 
-func NewLicenses(sd SiteData) (page *Licenses) {
+func NewLicenses(sd sef.SiteData) (page *Licenses) {
 	page = new(Licenses)
-	sd.Title = sd.Title + " | Licenses"
+	sd.AddTitle(" | Licenses")
 	page.data.SiteData = sd
 	return page
 }

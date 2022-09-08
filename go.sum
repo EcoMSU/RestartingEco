@@ -1,5 +1,7 @@
 github.com/EcoMSU/emdb v0.1.0 h1:0nnn1KHqxO8pYtmaK1DaepGZKJMPPV9aBiR6ioUzTLg=
 github.com/EcoMSU/emdb v0.1.0/go.mod h1:l+23oRkgAu5ZlblXedpkk5h3eCbKL5ykiWi0D3NEuaU=
+github.com/EcoMSU/sef v0.1.0 h1:9YZo0TAf5Wwu0mbCADN5glSw7Pcnt3eHmICbXhaXrhs=
+github.com/EcoMSU/sef v0.1.0/go.mod h1:938AEJiyP88effH/P03GojkukBHAEB6EqOC0mSH+7a0=
 github.com/otiai10/copy v1.7.0 h1:hVoPiN+t+7d2nzzwMiDHPSOogsWAStewq3TwU05+clE=
 github.com/otiai10/copy v1.7.0/go.mod h1:rmRl6QPdJj6EiUqXQ/4Nn2lLXoNQjFCQbbNrxgc/t3U=
 github.com/otiai10/curr v0.0.0-20150429015615-9b4961190c95/go.mod h1:9qAhocn7zKJG+0mI8eUu6xqkFDYS2kb2saOteoSB3cE=

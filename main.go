@@ -7,17 +7,18 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/EcoMSU/sef"
 	"github.com/otiai10/copy"
 )
 
 var logger *log.Logger
 
-func prepare() (s *site, err error) {
+func prepare() (s sef.Site, err error) {
 	var buildPath string
 	buildPath, err = filepath.Abs("./build")
 	os.MkdirAll(buildPath, os.ModePerm)
 
-	s = NewSite(SiteData{
+	s = sef.NewSite(sef.SiteData{
 		Title: "Экология: Перезагрузка",
 		Desc:  "Всероссийская онлайн-конференция Студенческого совета МГУ с международным участием о разрушении популярных экологических мифов.",
 		URL:   "https://RestartingEco.ru/",
@@ -33,8 +34,8 @@ func prepare() (s *site, err error) {
 		{"/icon/", "/icon/", "./static/icon"},
 	})
 
-	s.AddPage("licenses.html", NewLicenses(s.SiteData))
-	s.AddPage("index.html", NewIndex(buildPath, s.SiteData))
+	s.AddPage("licenses.html", NewLicenses(s.GetData()))
+	s.AddPage("index.html", NewIndex(buildPath, s.GetData()))
 	s.AddAlias("", "index.html")
 	return
 }
@@ -74,7 +75,7 @@ func run() {
 	server = http.NewServeMux()
 	s.ServeTo(server)
 
-	log.Fatal(s.Run())
+	log.Fatal(s.Run(0))
 }
 
 func empty() {
